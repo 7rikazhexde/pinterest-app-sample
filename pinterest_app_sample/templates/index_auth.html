@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pinterest OAuth Demo</title>
+</head>
+<body>
+    <h1>Pinterest OAuth Demo</h1>
+    <form method="POST">
+        <label for="app_id">App ID:</label>
+        <input type="text" id="app_id" name="app_id" required>
+        <br>
+        <label for="app_secret">App Secret:</label>
+        <input type="password" id="app_secret" name="app_secret" required>
+        <br>
+        <button type="submit">Authorize</button>
+    </form>
+    {% if access_token %}
+    <h2>Access Token:</h2>
+    <p>{{ access_token }}</p>
+    {% endif %}
+</body>
+</html>
