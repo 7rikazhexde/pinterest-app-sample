@@ -11,7 +11,7 @@ An application that reads image files in a specified folder and posts a Pin usin
 > [!IMPORTANT]  
 > This app uses the Pinterest API (V5), but you must create a Pinterest business account and register (apply) for an App beforehand.
 >
-> This is a specification of the Pinterest API, which generates an Access Token using the App id and App Secret Key associated with the app in the OAuth 2.0 authentication framework, and sends a GET/POST request to the endpoint URL using the Bearer authentication method This is because it is a mechanism to create/manage boards and pins by sending GET/POST requests to the endpoint URL using the Bearer authentication method.
+> This is a Pinterest API specification. Specifically, to create/manage boards and pins, an Access Token is generated using the App id and App Secret Key associated with the app in the OAuth 2.0 authentication framework, and the Bearer authentication method is used to send GET/POST request to the endpoint URL using the Bearer authentication method. 
 >
 > Details are described below.
 >
