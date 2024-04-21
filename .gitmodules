@@ -1,0 +1,3 @@
+[submodule "pinterest-api-quickstart"]
+	path = pinterest-api-quickstart
+	url = https://github.com/7rikazhexde/pinterest-api-quickstart.git
