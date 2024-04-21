@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pinterest-app-sample"
-version = "0.1.2"
+version = "0.1.3"
 description = "Sample application repository using Pinterest API."
 authors = ["7rikaz_wsl1 <7rikaz.h785.stat2ltas41lcijad@gmail.com>"]
 readme = "README.md"
