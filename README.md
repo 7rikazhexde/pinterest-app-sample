@@ -21,7 +21,7 @@ An application that reads image files in a specified folder and posts a Pin usin
 
 ### Screenshot
 
-[Pinterest_Pin_Creator.png](./.demo/Pinterest_Pin_Creator.png)
+<img width="800" alt="Pinterest_Pin_Creator" src="./.demo/Pinterest_Pin_Creator.png">
 
 ### Usage
 
