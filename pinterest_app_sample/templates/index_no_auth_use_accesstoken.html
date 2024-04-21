@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pinterest Pin Creator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        label {
+            text-align: right;
+        }
+        input[type="text"], input[type="password"], button {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .warning {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .success {
+            color: blue;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#get_images_btn").on("click", function() {
+                clearMessageBox();
+                var folderPath = $("#image_folder").val();
+                if (!folderPath) {
+                    showWarning("画像フォルダパスを入力してください。");
+                    return;
+                }
+                $.ajax({
+                    url: "/get_images",
+                    type: "POST",
+                    data: { folder_path: folderPath },
+                    success: function(response) {
+                        var imageList = $("#image_list");
+                        imageList.empty();
+                        response.forEach(function(imageName) {
+                            imageList.append("<li>" + imageName + "</li>");
+                        });
+                    }
+                });
+            });
+
+            $("#get_boards_btn").on("click", function() {
+                clearMessageBox();
+                var accessToken = $("#access_token").val();
+                var username = $("#username").val();
+                if (!accessToken) {
+                    showWarning("アクセストークンを入力してください。");
+                    return;
+                }
+                $.ajax({
+                    url: "/get_boards",
+                    type: "POST",
+                    data: { access_token: accessToken, username: username },
+                    success: function(response) {
+                        var boardList = $("#board_list");
+                        boardList.empty();
+                        response.forEach(function(boardInfo) {
+                            boardList.append("<li>" + boardInfo + "</li>");
+                        });
+                    }
+                });
+            });
+
+            $("form").on("submit", function(event) {
+            event.preventDefault();
+            clearMessageBox();
+
+            var accessToken = $("#access_token").val();
+            var boardId = $("#board_id").val();
+            var folderPath = $("#image_folder").val();
+            if (!accessToken || !boardId || !folderPath) {
+                showWarning("すべてのフィールドを入力してください。");
+                return;
+            }
+
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: formData,
+                success: function(data) {
+                    if (data.warning) {
+                        showWarning(data.warning);
+                    } else if (data.success) {
+                        showSuccess(data.success);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    showWarning("エラーが発生しました: " + error);
+                }
+            });
+        });
+
+        function showWarning(message) {
+            $("#message_box").html(message).removeClass("success").addClass("warning").show();
+        }
+
+        function showSuccess(message) {
+            $("#message_box").html(message).removeClass("warning").addClass("success").show();
+        }
+
+        function clearMessageBox() {
+            $("#message_box").hide();
+        }
+    });
+</script>
+
+</head>
+<body>
+    <h1>Pinterest Pin Creator</h1>
+    <form method="POST">
+        <label for="access_token">アクセストークン:</label>
+        <input type="password" id="access_token" name="access_token" required>
+
+        <label for="board_id">ボードID:</label>
+        <input type="text" id="board_id" name="board_id" required>
+
+        <label for="image_folder">画像フォルダパス:</label>
+        <input type="text" id="image_folder" name="image_folder" required>
+
+        <label></label>
+        <button type="button" id="get_images_btn">画像ファイルを表示</button>
+
+        <label></label>
+        <button type="button" id="get_boards_btn">ボード一覧を表示</button>
+
+        <label></label>
+        <button type="submit">ピンを投稿</button>
+    </form>
+
+    {% if warning %}
+    <div id="message_box" class="warning">{{ warning|safe }}</div>
+    {% elif success %}
+    <div id="message_box" class="success">{{ success }}</div>
+    {% else %}
+    <div id="message_box" style="display: none;"></div>
+    {% endif %}
+
+    <h2>画像ファイル一覧:</h2>
+    <ul id="image_list"></ul>
+
+    <h2>ボード一覧:</h2>
+    <ul id="board_list"></ul>
+</body>
+</html>

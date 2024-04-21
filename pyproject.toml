@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pinterest-app-sample"
-version = "0.1.0"
+version = "0.1.1"
 description = "Sample application repository using Pinterest API."
 authors = ["7rikaz_wsl1 <7rikaz.h785.stat2ltas41lcijad@gmail.com>"]
 readme = "README.md"
@@ -10,6 +10,11 @@ python = "^3.10"
 flask = "^3.0.3"
 requests = "^2.31.0"
 
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.7.0"
+ruff = "^0.4.1"
+tomlkit = "^0.12.4"
 
 [build-system]
 requires = ["poetry-core"]

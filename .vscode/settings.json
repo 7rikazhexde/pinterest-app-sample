@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/pinterest-api-quickstart/python/src"
+    ],
+    "files.exclude": {
+        "**/.git": false
+    }
+}
