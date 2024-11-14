@@ -11,7 +11,7 @@ An application that reads image files in a specified folder and posts a Pin usin
 > [!IMPORTANT]  
 > This app uses the Pinterest API (V5), but you must create a Pinterest business account and register (apply) for an App beforehand.
 >
-> This is a Pinterest API specification. Specifically, to create/manage boards and pins, an Access Token is generated using the App id and App Secret Key associated with the app in the OAuth 2.0 authentication framework, and the Bearer authentication method is used to send GET/POST request to the endpoint URL using the Bearer authentication method. 
+> This is a Pinterest API specification. Specifically, to create/manage boards and pins, an Access Token is generated using the App id and App Secret Key associated with the app in the OAuth 2.0 authentication framework, and the Bearer authentication method is used to send GET/POST request to the endpoint URL using the Bearer authentication method.
 >
 > Details are described below.
 >
@@ -25,17 +25,38 @@ An application that reads image files in a specified folder and posts a Pin usin
 
 ### Usage
 
-1. Set up the environment with your credentials (**app ID** and **secret**).
+1. Clone project
+
+   Clone project with submodule
+
+   ```bash
+   git clone --recursive https://github.com/7rikazhexde/pinterest-app-sample.git
+   ```
+
+   Or clone main project and clone submodule
+
+   ```bash
+   git clone --recursive https://github.com/7rikazhexde/pinterest-app-sample.git
+   git submodule update --init --recursive
+   ```
+
+   If you want to update submodule thereafter, do the following
+
+   ```bash
+   git submodule update --remote
+   ```
+
+2. Set up the environment with your credentials (**app ID** and **secret**).
 
    Ref: [Quick Start](https://github.com/7rikazhexde/pinterest-api-quickstart/tree/be25168b22b0d2492385546fe22d794bd26d59d0?tab=readme-ov-file#quick-start)
 
-2. Run command.
+3. Run command.
 
    ```bash
    poetry install
    poetry run python pinterest_app_sample
    ```
 
-3. Use **app ID** and **secret** to authenticate **OAuth 2.0** and obtain an **access token**.
+4. Use **app ID** and **secret** to authenticate **OAuth 2.0** and obtain an **access token**.
 
-4. Pin submission with **Board ID** and **Image Folder Path**.
+5. Pin submission with **Board ID** and **Image Folder Path**.
